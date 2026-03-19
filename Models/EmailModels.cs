@@ -1,4 +1,4 @@
-namespace BuilderEmailDemo;
+namespace EmailBuilderDemo.Models;
 
 public sealed class EmailMessage
 {
@@ -24,17 +24,17 @@ public sealed class EmailMessage
 
         var attachments = Attachments.Count == 0
             ? "(none)"
-            : string.Join(", ", Attachments.Select(a => $"{a.FileName} ({a.ContentType}, {a.Bytes.Length} bytes)"));
+            : string.Join(", ", Attachments.Select(item => $"{item.FileName} ({item.ContentType}, {item.Bytes.Length} bytes)"));
 
-        return $"From: {From}\n" +
-               $"To: {Join(To)}\n" +
-               $"Cc: {Join(Cc)}\n" +
-               $"Bcc: {Join(Bcc)}\n" +
-               $"Subject: {Subject}\n" +
-               $"Headers: {headers}\n" +
-               $"Attachments: {attachments}\n" +
-               $"TextBody: {(TextBody is null ? "(null)" : "<set>")}\n" +
-               $"HtmlBody: {(HtmlBody is null ? "(null)" : "<set>")}\n";
+        return $"Отправитель: {From}\n" +
+               $"Получатели: {Join(To)}\n" +
+               $"Копия: {Join(Cc)}\n" +
+               $"Скрытая копия: {Join(Bcc)}\n" +
+               $"Тема: {Subject}\n" +
+               $"Заголовки: {headers}\n" +
+               $"Вложения: {attachments}\n" +
+               $"Текстовое тело: {(TextBody is null ? "(не задано)" : "<задано>")}\n" +
+               $"HTML-тело: {(HtmlBody is null ? "(не задано)" : "<задано>")}\n";
     }
 }
 
